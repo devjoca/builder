@@ -12,7 +12,8 @@ class RunNewBuildTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function test_create_a_new_build_of_app()
+    /** @test */
+    public function can_create_a_new_build_of_app()
     {
         $project = factory(Project::class)->create();
 
