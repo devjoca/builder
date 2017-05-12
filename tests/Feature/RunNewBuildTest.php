@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Project;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -9,12 +10,14 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class RunNewBuildTest extends TestCase
 {
-    public function test_run_a_new_build_of_app()
+    use DatabaseMigrations;
+
+    public function test_create_a_new_build_of_app()
     {
-        $app = factory(Application::class)->create();
+        $project = factory(Project::class)->create();
 
-        $app->runBuild();
+        $project->runBuild();
 
-        $this->assertTrue($app->builds()->count(), 1);
+        $this->assertEquals($project->builds()->count(), 1);
     }
 }
