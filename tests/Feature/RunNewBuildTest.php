@@ -13,12 +13,13 @@ class RunNewBuildTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function can_create_a_new_build_of_app()
+    public function can_create_a_new_build_of_app( )
     {
         $project = factory(Project::class)->create();
 
-        $project->runBuild();
+        $response = $this->json('POST', "projects/{$project->id}/build");
 
+        $response->assertStatus(200);
         $this->assertEquals($project->builds()->count(), 1);
     }
 }
