@@ -28,3 +28,11 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
         'name' => 'New project'
     ];
 });
+$factory->state(App\Project::class, 'deployable', function (Faker\Generator $faker) {
+    return [
+        'name' => 'New project',
+        'sshUser' => 'user',
+        'sshHost' => 'host',
+        'deployScript' => 'bash path/to/script.sh',
+    ];
+});

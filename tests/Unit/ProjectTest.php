@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Project;
 use Tests\TestCase;
+use App\Ssh\FakeSshClient;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -16,7 +17,7 @@ class ProjectTest extends TestCase
     {
         $project = factory(Project::class)->create();
 
-        $build = $project->runBuild();
+        $build = $project->runBuild(new FakeSshClient);
 
         $this->assertEquals($build->fresh(), $project->builds()->first());
         $this->assertEquals(1, $project->builds()->count());
@@ -27,8 +28,8 @@ class ProjectTest extends TestCase
     {
         $project = factory(Project::class)->create();
 
-        $build1 = $project->runBuild();
-        $build2 = $project->runBuild();
+        $build1 = $project->runBuild(new FakeSshClient);
+        $build2 = $project->runBuild(new FakeSshClient);
 
         $this->assertEquals($build2->id, $project->builds->first()->id);
     }

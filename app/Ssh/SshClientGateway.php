@@ -9,4 +9,6 @@ interface SshClientGateway
 
     public function init(Project $project);
 
+    public function runTask();
+
 }
