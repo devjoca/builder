@@ -17,7 +17,7 @@ class RunNewBuildTest extends TestCase
     /** @test */
     public function can_create_a_new_build_of_app( )
     {
-        $project = factory(Project::class)->create();
+        $project = factory(Project::class)->states('deployable')->create();
         $fakeSshClient = new FakeSshClient;
         $this->app->instance(SshClientGateway::class, $fakeSshClient);
 
