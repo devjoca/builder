@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Ssh\SshClient;
+use App\Ssh\SshClientGateway;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -12,8 +12,12 @@ class Project extends Model
         return $this->hasMany(Build::class)->latest('id');
     }
 
-    public function runBuild()
+    public function runBuild(SshClientGateway $ssh)
     {
-        return $this->builds()->create([]);
+        $ssh->init($this);
+
+        return $this->builds()->create([
+            'output' => $ssh->runTask(),
+        ]);
     }
 }
