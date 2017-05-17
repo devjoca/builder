@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use Schema;
+use App\Ssh\SshClient;
+use App\Ssh\SshClientGateway;
 use Illuminate\Support\ServiceProvider;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(SshClientGateway::class, SshClient::class);
     }
 }

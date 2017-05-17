@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Ssh;
 
 use App\Project;
 use Tests\TestCase;
