@@ -14,22 +14,23 @@ class SshClient implements SshClientGateway
     private $private_key;
     private $public_key;
 
+    public function __construct()
+    {
+        $this->private_key = storage_path("builder_public.key");
+        $this->public_key = storage_path("builder_private.key");
+    }
+
     public function init(Project $project)
     {
         $this->user = $project->sshUser;
         $this->host = $project->sshHost;
         $this->script = $project->deployScript;
-        $this->private_key = storage_path("builder_public.key");
-        $this->public_key = storage_path("builder_private.key");
     }
 
     public function runTask()
     {
         $ssh = new SSH2($this->host);
         $key = new RSA;
-        if (! file_exists($this->private_key)) {
-            $this->generateRsaKey();
-        }
 
         $key->loadKey(file_get_contents($this->private_key));
         if (! $ssh->login($this->user, $key)) {
@@ -37,6 +38,15 @@ class SshClient implements SshClientGateway
         }
 
         return $ssh->exec($this->script);
+    }
+
+    public function getPublicKey()
+    {
+        if (! file_exists($this->public_key)) {
+            $this->generateRsaKey();
+        }
+
+        return file_get_contents($this->public_key);
     }
 
     private function generateRsaKey()

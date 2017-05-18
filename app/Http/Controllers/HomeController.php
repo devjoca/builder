@@ -2,27 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+use App\Ssh\SshClientGateway;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function index(SshClientGateway $ssh)
     {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('home');
+        return view('home', [
+            'projects' => Project::all(),
+            'public_key' => $ssh->getPublicKey(),
+        ]);
     }
 }
