@@ -20,7 +20,7 @@
                                 <td>{{ $project->id }}</td>
                                 <td>{{ $project->name }}</td>
                                 <td>{{ $project->sshHost }}</td>
-                                <td><button class="btn">Build!</button></td>
+                                <td><build-btn project-id="{{ $project->id }}"></build-btn></td>
                             </tr>
                         @endforeach
                     </table>
