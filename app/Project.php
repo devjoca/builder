@@ -33,4 +33,10 @@ class Project extends Model
             throw new InvalidArgumentException;
         }
     }
+
+    public static function findByUser(User $user)
+    {
+        return $user->projects;
+    }
+
 }

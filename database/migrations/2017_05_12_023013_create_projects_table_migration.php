@@ -20,6 +20,11 @@ class CreateProjectsTableMigration extends Migration
             $table->string('sshHost')->nullable();
             $table->text('deployScript')->nullable();
             $table->timestamps();
+
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use App\Project;
 use Tests\TestCase;
 use App\Ssh\FakeSshClient;
@@ -47,5 +48,24 @@ class ProjectTest extends TestCase
         }
 
         $this->fail("Project need ssh values");
+    }
+
+    /** @test */
+    public function find_projects_by_user()
+    {
+        $user = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+
+        $project = factory(Project::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        factory(Project::class)->create([
+            'user_id' => $user2->id,
+        ]);
+
+        $projects = Project::findByUser($user);
+
+        $this->assertEquals($projects, $user->projects);
     }
 }
