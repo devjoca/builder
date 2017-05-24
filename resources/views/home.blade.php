@@ -5,7 +5,12 @@
     <div class="row">
         <div class="col-md-7">
             <div class="panel panel-default">
-                <div class="panel-heading">Projects</div>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-9">Projects</div>
+                        <div class="col-sm-3"><a href="{{ route('project.create') }}">Create Project</a></div>
+                    </div>
+                </div>
 
                 <div class="panel-body">
                     <table class="table table-striped">

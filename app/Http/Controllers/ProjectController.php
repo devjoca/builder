@@ -33,4 +33,22 @@ class ProjectController extends Controller
 
         return redirect(route('project.edit', $project->id))->with('message', 'Successful');
     }
+
+    public function create()
+    {
+        return view('projects.create');
+    }
+
+    public function store()
+    {
+        request()->user()
+                 ->createProject(new Project(request()->only(
+                    'name',
+                    'sshUser',
+                    'sshHost',
+                    'deployScript'
+                )));
+
+        return redirect(route('home'))->with('message', 'Successful');
+    }
 }
