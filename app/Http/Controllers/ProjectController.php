@@ -21,4 +21,16 @@ class ProjectController extends Controller
 
         return view('projects.edit', ['project' => $project]);
     }
+
+    public function update(Project $project)
+    {
+        $project->update(request()->intersect([
+            'name',
+            'sshUser',
+            'sshHost',
+            'deployScript',
+        ]));
+
+        return redirect(route('project.edit', $project->id))->with('message', 'Successful');
+    }
 }

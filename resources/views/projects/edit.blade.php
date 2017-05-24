@@ -8,25 +8,32 @@
                 <div class="panel-heading">Project Information</div>
 
                 <div class="panel-body">
-                    <div class="form-group">
-                        <label for="project_name">Name:</label>
-                        <input type="text" class="form-control" name="project_name" value="{{ $project->name }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="ssh_user">SSH User:</label>
-                        <input type="text" class="form-control" name="ssh_user" value="{{ $project->sshUser }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="ssh_host">SSH Host:</label>
-                        <input type="text" class="form-control" name="ssh_host" value="{{ $project->sshHost }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="deploy_script">Deploy Script:</label>
-                        <input type="text" class="form-control" name="deploy_script" value="{{ $project->deployScript }}">
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" class="btn">Guardar</button>
-                    </div>
+                    @if(session('message'))
+                        <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+                    @endif
+                    <form action="{{ route('project.update', $project->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" name="name" value="{{ $project->name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="sshUser">SSH User:</label>
+                            <input type="text" class="form-control" name="sshUser" value="{{ $project->sshUser }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="sshHost">SSH Host:</label>
+                            <input type="text" class="form-control" name="sshHost" value="{{ $project->sshHost }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="deployScript">Deploy Script:</label>
+                            <input type="text" class="form-control" name="deployScript" value="{{ $project->deployScript }}">
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn">Guardar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
