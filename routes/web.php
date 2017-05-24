@@ -21,5 +21,6 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::post('/projects/{project}/build', 'ProjectController@build')->name('project.build');
+    Route::get('/projects/{project}/edit', 'ProjectController@edit')->name('project.edit');
 });
 

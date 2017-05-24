@@ -14,4 +14,11 @@ class ProjectController extends Controller
 
         return response()->json($build);
     }
+
+    public function edit(Project $project)
+    {
+        $project->load('builds');
+
+        return view('projects.edit', ['project' => $project]);
+    }
 }
