@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">Projects</div>
 
@@ -14,6 +14,7 @@
                             <th>Name</th>
                             <th>Server</th>
                             <th></th>
+                            <th></th>
                         </tr>
                         @foreach($projects as $project)
                             <tr>
@@ -21,13 +22,14 @@
                                 <td>{{ $project->name }}</td>
                                 <td>{{ $project->sshHost }}</td>
                                 <td><build-btn project-id="{{ $project->id }}"></build-btn></td>
+                                <td><a class="btn btn-default" href="{{ route('project.edit', $project->id) }}">Editar</a></td>
                             </tr>
                         @endforeach
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">SSH Key</div>
 
