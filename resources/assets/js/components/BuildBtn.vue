@@ -1,5 +1,5 @@
 <template>
-    <button class="btn" @click="build(projectId)" :disabled="isBuilding">{{ message }}</button>
+    <button class="btn" @click="build()" :disabled="isBuilding">{{ message }}</button>
 </template>
 <script>
     export default {
@@ -11,12 +11,12 @@
         },
         props: ['projectId'],
         methods: {
-            build(projectId) {
+            build() {
                 const vm = this;
                 vm.message = "... Building!";
                 vm.isBuilding = true;
 
-                axios.post(`projects/${projectId}/build`)
+                axios.post(`projects/${this.projectId}/build`)
                     .then(function (response) {
                         vm.isBuilding = false;
                         vm.message = "Build!";
