@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use App\Project;
 use Tests\TestCase;
 use App\Ssh\FakeSshClient;
@@ -17,11 +18,15 @@ class RunNewBuildTest extends TestCase
     /** @test */
     public function can_create_a_new_build_of_app( )
     {
-        $project = factory(Project::class)->states('deployable')->create();
+        $user = factory(User::class)->create();
+        $project = factory(Project::class)->states('deployable')->create([
+            'user_id' => $user->id,
+        ]);
         $fakeSshClient = new FakeSshClient;
         $this->app->instance(SshClientGateway::class, $fakeSshClient);
 
-        $response = $this->json('POST', "projects/{$project->id}/build");
+        $response = $this->actingAs($user)
+                         ->json('POST', "projects/{$project->id}/build");
 
         $response->assertStatus(200);
         $this->assertEquals($project->builds()->count(), 1);

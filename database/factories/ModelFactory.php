@@ -25,7 +25,10 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
     return [
-        'name' => 'New project'
+        'name' => 'New project',
+        'user_id' =>  function () {
+            return factory(App\User::class)->create()->id;
+        },
     ];
 });
 $factory->state(App\Project::class, 'deployable', function (Faker\Generator $faker) {

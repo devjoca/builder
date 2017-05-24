@@ -10,6 +10,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FakeSshClientTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /** @test */
     public function init_ssh_client()
     {

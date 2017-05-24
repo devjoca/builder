@@ -10,6 +10,8 @@ use Tests\TestCase;
 
 class SshClientTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /** @test */
     public function can_init_with_project_data()
     {
