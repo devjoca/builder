@@ -13,6 +13,9 @@
                 </div>
 
                 <div class="panel-body">
+                    @if(session('message'))
+                        <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+                    @endif
                     <table class="table table-striped">
                         <tr>
                             <th>#</th>

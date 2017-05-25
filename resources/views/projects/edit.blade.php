@@ -8,9 +8,6 @@
                 <div class="panel-heading">Project Information</div>
 
                 <div class="panel-body">
-                    @if(session('message'))
-                        <div class="alert alert-success" role="alert">{{ session('message') }}</div>
-                    @endif
                     <form action="{{ route('project.update', $project->id) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}

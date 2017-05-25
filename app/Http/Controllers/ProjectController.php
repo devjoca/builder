@@ -31,7 +31,7 @@ class ProjectController extends Controller
             'deployScript',
         ]));
 
-        return redirect(route('project.edit', $project->id))->with('message', 'Successful');
+        return redirect(route('home'))->with('message', 'Successful');
     }
 
     public function create()

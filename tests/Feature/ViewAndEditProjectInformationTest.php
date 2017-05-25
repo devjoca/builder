@@ -47,7 +47,7 @@ class ViewAndEditProjectInformationTest extends TestCase
                             'deployScript' => 'deploy script',
                         ]);
 
-        $response->assertRedirect(route('project.edit', $project->id))
+        $response->assertRedirect(route('home'))
                  ->assertSessionHas('message', 'Successful');
         $this->assertEquals($project->fresh()->name, 'Some weird project name');
         $this->assertEquals($project->fresh()->sshUser, 'user');
